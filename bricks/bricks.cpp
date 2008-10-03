@@ -2,7 +2,7 @@
 #pragma once
 #include "stdafx.h"
 
-Point * inicioBall = new Point(0.0f , 0.0f);
+Point * inicioBall = new Point(5.0f , 0.0f);
 Speed * vel = new Speed(0.2f, 45);
 Ball * pelota = new Ball(inicioBall, vel, /*radio*/ 0.03f);
 
@@ -22,6 +22,7 @@ float rgb(float v)
 
 
 void dibujarPaleta() {
+	glColor3f(0.0,0.0,0.0);
 	glPushMatrix();
 	glTranslatef(paleta->_pos->_x, paleta->_pos->_y, 0.0f);
 	glBegin(GL_POLYGON);
@@ -35,6 +36,7 @@ void dibujarPaleta() {
 
 void dibujarPelota()
 {
+	glColor3f(0.0,0.0,1.0);
 	glPushMatrix();
 	glTranslatef(pelota->_pos->_x, pelota->_pos->_y, 0.0f);
 	 
@@ -62,32 +64,32 @@ void display(){
 	glClearColor(1.0f, 1.0f, 1.0f ,1.0f);				
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
-	//glTranslatef(-10.0f,-13.0f ,0.0f);
+	glPushMatrix();
+	//El tablero mideo 20 d ancho por 26 d altura
+	glTranslatef(-10.0f,-13.0f ,0.0f);
 
 
-	glColor3f(0.0,0.0,1.0);
-	dibujarPelota();
-	glColor3f(0.0,0.0,0.0);
-	
+	dibujarPelota();	
 
 	dibujarPaleta();
-	
+	glPopMatrix();
 	glutSwapBuffers();
+	
 }
 
 
 void update(int v) {
-	if (pelota->_pos->_x >= 9.5 || pelota->_pos->_x <= -9.0) {
-		if(pelota->_pos->_x >= 9.0 )
-			pelota->_pos->setx(9.0);
+	if (pelota->_pos->_x >= 20|| pelota->_pos->_x <= 0) {
+		if(pelota->_pos->_x >= 10 )
+			pelota->_pos->setx(20.0);
 		else
-			pelota->_pos->setx(-9.0);
+			pelota->_pos->setx(0.0);
 
 		pelota->bounceSides();
 	}
-	if (pelota->_pos->_y >= 12.0) {
-		if( pelota->_pos->_y >= 12.0 )
-			pelota->_pos->sety(12.0);
+	if (pelota->_pos->_y >= 26.0) {
+		if( pelota->_pos->_y >= 26.0 )
+			pelota->_pos->sety(26.0);
 		pelota->bounceRoofs();
 	}
 	pelota->move();
