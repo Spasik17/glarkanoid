@@ -28,3 +28,8 @@ void Ball::bounceRoofs()
 {
 	_vel->setVy(-(_vel->_Vy));
 }
+
+void Ball::bounce(Speed normal)
+{
+	// d = d - 2s
+}

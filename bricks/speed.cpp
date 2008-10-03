@@ -18,6 +18,20 @@ Speed::Speed(float m, float angle)
 	_Vy = _m*sin(rads(_angle));
 }
 
+float Speed::dp(Speed * proj)
+{
+	 return _Vx * proj->_Vx + _Vy * proj->_Vy;
+}
+
+Speed * Speed::project(Speed * proj)
+{
+	Speed * res = new Speed(_m, _angle);
+	float dot = this->dp(proj);
+	res->setVx(dot*proj->_Vx);
+	res->setVy(dot*proj->_Vy);
+	return res;
+}
+
 void Speed::setAngle(float angle)
 {
 	_angle = angle;
