@@ -1,0 +1,1 @@
+arkanoid developed with openGL and c++ by Cristian Caroli and Jose Dunia from Universidad Simón Bolívar, Venezuela
